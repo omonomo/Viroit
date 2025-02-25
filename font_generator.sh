@@ -159,7 +159,7 @@ move_x_vert_colon="54" # ：；
 move_x_vert_bar="-10" # ｜
 move_x_vert_solidus="-10" # ／＼
 move_x_vert_math="13" # ＝－＜＞
-move_y_vert_bbar="14" # ￤
+move_y_vert_bbar="2" # ￤
 
 # 縦書き全角ラテン小文字移動量
 move_y_vert_1="-10"
@@ -1689,6 +1689,8 @@ while (i < SizeOf(input_list))
     Print("Remove some glyphs")
     Select(0u0020); Clear() # 半角スペース
     Select(0u00a0); Clear() # ノーブレイクスペース
+    Select(0u00a9); Clear() # ©
+    Select(0u00ae); Clear() # ®
     Select(0u00bc, 0u00be); Clear() # ¼½¾
     Select(0u2013, 0u2015); Clear() # –—―
     Select(0u2025, 0u2026); Clear() # ‥…
