@@ -204,7 +204,7 @@ scale_width_hankaku="100" # 半角英数文字の横拡大率
 scale_height_hankaku="100" # 半角英数文字の縦拡大率
 scale_width_block="93" # 半角罫線素片・ブロック要素の横拡大率
 width_hankaku="512" # 半角文字幅
-move_x_calt_latin="16" # ラテン文字のカーニングX座標移動量
+move_x_calt_latin="10" # ラテン文字のカーニングX座標移動量
 move_x_calt_symbol="32" # 記号のカーニングX座標移動量
 move_x_hankaku="0" # 半角文字移動量
 
@@ -216,7 +216,7 @@ scale_width_hankaku_loose="100" # 半角英数文字の横拡大率 (Loose 版)
 scale_height_hankaku_loose="100" # 半角英数文字の縦拡大率 (Loose 版)
 scale_width_block_loose="104" # 半角罫線素片・ブロック要素の横拡大率 (Loose 版)
 width_hankaku_loose="576" # 半角文字幅 (Loose 版)
-move_x_calt_latin_loose="18" # ラテン文字のカーニングX座標移動量 (Loose 版)
+move_x_calt_latin_loose="12" # ラテン文字のカーニングX座標移動量 (Loose 版)
 move_x_calt_symbol_loose="36" # 記号のカーニングX座標移動量 (Loose 版)
 move_x_hankaku_loose=$(((width_hankaku_loose - ${width_hankaku}) / 2)) # 半角文字移動量 (Loose 版)
 
@@ -893,11 +893,23 @@ while (i < SizeOf(input_list))
     RemoveOverlap()
     Select(65552);  Clear() # Temporary glyph
 
+# f (右に少し移動)
+    # ラテン文字
+    Select(0u0066) # f
+ #    SelectMore(0u0192) # ƒ
+ #    SelectMore(0u1d6e) # ᵮ
+ #    SelectMore(0u1d82) # ᶂ
+ #    SelectMore(0u1e1f) # ḟ
+ #    SelectMore(0ua799) # ꞙ
+    Move(10, 0)
+    SetWidth(${width_latin})
+
 # j (左に少し移動)
     # ラテン文字
     Select(0u006a) # j
     SelectMore(0u0135) # ĵ
  #    SelectMore(0u01f0) # ǰ
+    SelectMore(0u0237) # ȷ
  #    SelectMore(0u0249) # ɉ
  #    SelectMore(0u029d) # ʝ
     # ギリシア文字
@@ -905,6 +917,68 @@ while (i < SizeOf(input_list))
     # キリル文字
     SelectMore(0u0458) # ј
     Move(-20, 0)
+    SetWidth(${width_latin})
+
+# l (左に少し移動)
+    Select(0u006c) # l
+    SelectMore(0u013a) # ĺ
+    SelectMore(0u013c) # ļ
+    SelectMore(0u013e) # ľ
+ #    SelectMore(0u0140) # ŀ
+    SelectMore(0u0142) # ł
+ #    SelectMore(0u019a) # ƚ
+ #    SelectMore(0u0234) # ȴ
+ #    SelectMore(0u026b, 0u026d) # ɫɬɭ
+ #    SelectMore(0u1d85) # ᶅ
+ #    SelectMore(0u1e37) # ḷ
+ #    SelectMore(0u1e39) # ḹ
+ #    SelectMore(0u1e3b) # ḻ
+ #    SelectMore(0u1e3d) # ḽ
+ #    SelectMore(0u2c61) # ⱡ
+ #    SelectMore(0ua749) # ꝉ
+ #    SelectMore(0ua78e) # ꞎ
+ #    SelectMore(0uab37, 0uab39) # ꬷꬸꬹ
+    Move(-10, 0)
+    SetWidth(${width_latin})
+
+# r (右に少し移動)
+    Select(0u0072) # r
+    SelectMore(0u0155) # ŕ
+    SelectMore(0u0157) # ŗ
+    SelectMore(0u0159) # ř
+ #    SelectMore(0u0211) # ȑ
+ #    SelectMore(0u0213) # ȓ
+ #    SelectMore(0u024d) # ɍ
+ #    SelectMore(0u027c, 0u027e) # ɼɽɾ
+ #    SelectMore(0u1d72, 0u1d73) # ᵲᵳ
+ #    SelectMore(0u1e5b) # ṛ
+ #    SelectMore(0u1e5d) # ṝ
+ #    SelectMore(0u1e5f) # ṟ
+ #    SelectMore(0u1d89) # ᶉ
+ #    SelectMore(0ua75b) # ꝛ
+ #    SelectMore(0ua7a7) # ꞧ
+ #    SelectMore(0uab47) # ꭇ
+ #    SelectMore(0uab49) # ꭉ
+    Move(10, 0)
+    SetWidth(${width_latin})
+
+# t (右に少し移動)
+    Select(0u0074) # t
+    SelectMore(0u0163) # ţ
+    SelectMore(0u0165) # ť
+ #    SelectMore(0u01ab) # ƫ
+ #    SelectMore(0u01ad) # ƭ
+    SelectMore(0u021b) # ț
+ #    SelectMore(0u0236) # ȶ
+ #    SelectMore(0u0288) # ʈ
+ #    SelectMore(0u1d75) # ᵵ
+ #    SelectMore(0u1e6b) # ṫ
+ #    SelectMore(0u1e6d) # ṭ
+ #    SelectMore(0u1e6f) # ṯ
+ #    SelectMore(0u1e71) # ṱ
+ #    SelectMore(0u1e97) # ẗ
+ #    SelectMore(0u2c66) # ⱦ
+    Move(10, 0)
     SetWidth(${width_latin})
 
 # Ǝ (ベースフォントを置き換え)
@@ -2419,7 +2493,15 @@ while (i < \$argc)
 # スペースの width 変更
     Print("Modified space width")
 
+    Select(0u115f) # hangul choseong filler
+    SelectMore(0u1160) # hangul jungseong filler
+    SelectMore(0u3164) # hangul filler
+    SetWidth(${width_zenkaku})
+
     Select(0u00ad) # soft hyphen
+    SelectMore(0u17b4) # khmer vowel inherent aq
+    SelectMore(0u17b5) # khmer vowel inherent aa
+    SelectMore(0u180e) # mongolian vowel separator
     SelectMore(0u2000) # en quad
     SelectMore(0u2001) # em quad
     SelectMore(0u2002) # en space
@@ -2431,18 +2513,23 @@ while (i < \$argc)
     SelectMore(0u2008) # punctuation space
     SelectMore(0u2009) # thin space
     SelectMore(0u200a) # hair space
-    SelectMore(0u2028) # line separator
-    SelectMore(0u2029) # paragraph separator
     SelectMore(0u202f) # narrow no-break space
     SelectMore(0u205f) # medium mathematical space
+    SelectMore(0uffa0) # halfwidth hangul filler
+    SelectMore(0ufffc) # object replacement character
+    SelectMore(0u133fc) # egyptian hieroglyph z015b
+    SelectMore(0u1d159) # musical symbol null notehead
     SetWidth(${width_hankaku})
 
     Select(0u034f) # combining grapheme joiner
+    SelectMore(0u061c) # arabic letter mark
     SelectMore(0u200b) # zero width space
     SelectMore(0u200c) # zero width non-joiner
     SelectMore(0u200d) # zero width joiner
     SelectMore(0u200e) # left-to-right mark
     SelectMore(0u200f) # right-to-left mark
+    SelectMore(0u2028) # line separator
+    SelectMore(0u2029) # paragraph separator
     SelectMore(0u202a) # left-to-right embedding
     SelectMore(0u202b) # right-to-left embedding
     SelectMore(0u202c) # pop directional formatting
@@ -2464,6 +2551,14 @@ while (i < \$argc)
     SelectMore(0u206e) # national digit shapes
     SelectMore(0u206f) # nominal digit shapes
     SelectMore(0ufeff) # zero width no-break space
+    SelectMore(0u1d173) # musical symbol begin beam
+    SelectMore(0u1d174) # musical symbol end beam
+    SelectMore(0u1d175) # musical symbol begin tie
+    SelectMore(0u1d176) # musical symbol end tie
+    SelectMore(0u1d177) # musical symbol begin slur
+    SelectMore(0u1d178) # musical symbol end slur
+    SelectMore(0u1d179) # musical symbol begin phrase
+    SelectMore(0u1d17a) # musical symbol end phrase
     SetWidth(0)
 
 # 記号のグリフを加工
@@ -4132,6 +4227,31 @@ while (i < \$argc)
     spc =[\
     0u00ad,\
     0u034f,\
+    0u061c,\
+    0u115f,\
+    0u1160,\
+    0u17b4,\
+    0u17b5,\
+    0u180e,\
+    0u200a,\
+    0u200b,\
+    0u200c,\
+    0u200d,\
+    0u200e,\
+    0u200f,\
+    0u202a,\
+    0u202b,\
+    0u202c,\
+    0u202d,\
+    0u202e,\
+    0u202f,\
+    0u205f,\
+    0u206a,\
+    0u206b,\
+    0u206c,\
+    0u206d,\
+    0u206e,\
+    0u206f,\
     0u2000,\
     0u2001,\
     0u2002,\
@@ -4142,21 +4262,8 @@ while (i < \$argc)
     0u2007,\
     0u2008,\
     0u2009,\
-    0u200a,\
-    0u200b,\
-    0u200c,\
-    0u200d,\
-    0u200e,\
-    0u200f,\
     0u2028,\
     0u2029,\
-    0u202a,\
-    0u202b,\
-    0u202c,\
-    0u202d,\
-    0u202e,\
-    0u202f,\
-    0u205f,\
     0u2060,\
     0u2061,\
     0u2062,\
@@ -4166,13 +4273,20 @@ while (i < \$argc)
     0u2067,\
     0u2068,\
     0u2069,\
-    0u206a,\
-    0u206b,\
-    0u206c,\
-    0u206d,\
-    0u206e,\
-    0u206f,\
-    0ufeff\
+    0u3164,\
+    0ufeff,\
+    0uffa0,\
+    0ufffc,\
+    0u133fc,\
+    0u1d159,\
+    0u1d173,\
+    0u1d174,\
+    0u1d175,\
+    0u1d176,\
+    0u1d177,\
+    0u1d178,\
+    0u1d179,\
+    0u1d17a\
     ]
     j = 0
     while (j < SizeOf(spc))
