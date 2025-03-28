@@ -5,7 +5,7 @@
 # コメントの前に # を入れていますが、形式的に入れているだけで # から後がコメントというわけではありません。
 
 # フォントのバージョン
-FONT_VERSION=1.0.0
+FONT_VERSION=1.0.1
 
 # フォント名
 FONT_FAMILYNAME=Viroit
@@ -31,7 +31,7 @@ SCALE_WIDTH_HANKAKU=100
 SCALE_HEIGHT_HANKAKU=100
 # カーニング横移動量 (em/1024)
 # ラテン文字
-MOVE_X_KERN_LATIN=16
+MOVE_X_KERN_LATIN=10
 # 記号
 MOVE_X_KERN_SYMBOL=32
 
@@ -41,7 +41,7 @@ SCALE_WIDTH_HANKAKU_LOOSE=100
 SCALE_HEIGHT_HANKAKU_LOOSE=100
 # カーニング横移動量 (em/1024)
 # ラテン文字
-MOVE_X_KERN_LATIN_LOOSE=18
+MOVE_X_KERN_LATIN_LOOSE=12
 # 記号
 MOVE_X_KERN_SYMBOL_LOOSE=36
 
