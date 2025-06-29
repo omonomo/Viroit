@@ -51,50 +51,53 @@ address_store_d_hyphen=$((address_store_zenhan + 172)) # 保管した縦書き�
 address_store_otherspace=$((address_store_d_hyphen + 1)) # 保管したその他のスペースアドレス
 address_store_end=$((address_store_otherspace + 2 - 1)) # 保管したグリフの最終アドレス
 
-address_vert_start="1114181" # 合成後のvert置換の先頭アドレス
-address_vert_bracket=${address_vert_start} # vert置換アドレス （
-address_vert_X=$((address_vert_bracket + 109)) # vert置換アドレス ✂
-address_vert_dh=$((address_vert_X + 3)) # vert置換アドレス ゠
-address_vert_mm=$((address_vert_dh + 27)) # vert置換アドレス ㍉
-address_vert_kabu=$((address_vert_mm + 333)) # vert置換アドレス ㍿
-address_vert_end=$((address_vert_kabu + 7 - 1)) # vert置換の最終アドレス ㋿
-
-address_calt_start=$((address_vert_end + 1)) # calt置換の先頭アドレス
-address_calt_AL=${address_calt_start} # calt置換アドレス(左に移動した A)
-address_calt_AR=$((address_calt_AL + 239)) # calt置換アドレス(右に移動した A)
-address_calt_figure=$((address_calt_AR + 239)) # calt置換アドレス(桁区切り付きの数字)
-address_calt_barD=$((address_calt_figure + 40)) # calt置換アドレス(下に移動した |)
-address_calt_hyphenL=$((address_calt_barD + 7)) # calt置換アドレス(左に移動した *)
-address_calt_hyphenR=$((address_calt_hyphenL + 28)) # calt置換アドレス(右に移動した *)
-address_calt_end=$((address_calt_hyphenR + 28 - 1)) # calt置換の最終アドレス (右上に移動した :)
-address_calt_barDLR="24" # calt置換アドレス(左右に移動した * から、左右下に移動した | までの増分)
-
-address_ss_start=$((address_calt_end + 1)) # ss置換の先頭アドレス
-address_ss_space=${address_ss_start} # ss置換アドレス(全角スペース)
-address_ss_figure=$((address_ss_space + 3)) # ss置換アドレス(桁区切り付きの数字)
-address_ss_vert=$((address_ss_figure + 50)) # ss置換の縦書き全角アドレス(縦書きの（)
-address_ss_zenhan=$((address_ss_vert + 109)) # ss置換の横書き全角半角アドレス(！)
-address_ss_braille=$((address_ss_zenhan + 172)) # ss置換の点字アドレス
-address_ss_visibility=$((address_ss_braille + 256)) # ss置換の識別性向上アドレス(/)
-address_ss_mod=$((address_ss_visibility + 43)) # ss置換のDQVZアドレス
-address_ss_line=$((address_ss_mod + num_mod_glyphs * 6)) # ss置換の罫線アドレス
-address_ss_arrow=$((address_ss_line + 32)) # ss置換の矢印アドレス
-address_ss_zero=$((address_ss_arrow + 4)) # ss置換のスラッシュ無し0アドレス
-address_ss_otherspace=$((address_ss_zero + 10)) # ss置換のその他のスペースアドレス
-address_ss_end=$((address_ss_otherspace + 2 - 1)) # ss置換の最終アドレス
-num_ss_glyphs_former=$((address_ss_braille - address_ss_start)) # ss置換のグリフ数(点字の前まで)
-num_ss_glyphs_latter=$((address_ss_end + 1 - address_ss_braille)) # ss置換のグリフ数(点字から後)
-num_ss_glyphs=$((address_ss_end + 1 - address_ss_start)) # ss置換の総グリフ数
-
-lookupIndex_calt="18" # caltテーブルのlookupナンバー (lookupの種類を増やした場合変更)
+address_vert_start="1114181" # 合成後のvert置換の先頭アドレス (リガチャなし)
+lookupIndex_liga_end="0" # リガチャ用caltの最終lookupナンバー (リガチャなし)
+address_vert_start_liga="1114271" # 合成後のvert置換の先頭アドレス (リガチャあり)
+lookupIndex_liga_end_liga="161" # リガチャ用caltの最終lookupナンバー (リガチャあり)
+lookupIndex_calt="18" # caltテーブルのlookupナンバー (リガチャなし、lookupの種類を増やした場合変更)
 num_calt_lookups="20" # caltのルックアップ数 (calt_table_makerでlookupを変更した場合、それに合わせる。table_modificatorも変更すること)
+address_init() {
+    address_vert_bracket=${address_vert_start} # vert置換アドレス （
+    address_vert_X=$((address_vert_bracket + 109)) # vert置換アドレス ✂
+    address_vert_dh=$((address_vert_X + 3)) # vert置換アドレス ゠
+    address_vert_mm=$((address_vert_dh + 27)) # vert置換アドレス ㍉
+    address_vert_kabu=$((address_vert_mm + 333)) # vert置換アドレス ㍿
+    address_vert_end=$((address_vert_kabu + 7 - 1)) # vert置換の最終アドレス ㋿
 
-lookupIndex_replace=$((lookupIndex_calt + num_calt_lookups)) # 単純置換のlookupナンバー
-num_replace_lookups="10" # 単純置換のルックアップ数 (lookupの数を変えた場合はcalt_table_makerも変更すること)
+    address_calt_start=$((address_vert_end + 1)) # calt置換の先頭アドレス
+    address_calt_AL=${address_calt_start} # calt置換アドレス(左に移動した A)
+    address_calt_AR=$((address_calt_AL + 239)) # calt置換アドレス(右に移動した A)
+    address_calt_figure=$((address_calt_AR + 239)) # calt置換アドレス(桁区切り付きの数字)
+    address_calt_barD=$((address_calt_figure + 40)) # calt置換アドレス(下に移動した |)
+    address_calt_hyphenL=$((address_calt_barD + 7)) # calt置換アドレス(左に移動した *)
+    address_calt_hyphenR=$((address_calt_hyphenL + 28)) # calt置換アドレス(右に移動した *)
+    address_calt_end=$((address_calt_hyphenR + 28 - 1)) # calt置換の最終アドレス (右上に移動した :)
+    address_calt_barDLR="24" # calt置換アドレス(左右に移動した * から、左右に移動した | までの増分)
 
-lookupIndex_ss=$((lookupIndex_replace + num_replace_lookups)) # ssテーブルのlookupナンバー
-num_ss_lookups="11" # ssのルックアップ数 (lookupの数を変えた場合はtable_modificatorも変更すること)
+    address_ss_start=$((address_calt_end + 1)) # ss置換の先頭アドレス
+    address_ss_space=${address_ss_start} # ss置換アドレス(全角スペース)
+    address_ss_figure=$((address_ss_space + 3)) # ss置換アドレス(桁区切り付きの数字)
+    address_ss_vert=$((address_ss_figure + 50)) # ss置換の縦書き全角アドレス(縦書きの（)
+    address_ss_zenhan=$((address_ss_vert + 109)) # ss置換の横書き全角半角アドレス(！)
+    address_ss_braille=$((address_ss_zenhan + 172)) # ss置換の点字アドレス
+    address_ss_visibility=$((address_ss_braille + 256)) # ss置換の識別性向上アドレス(/)
+    address_ss_mod=$((address_ss_visibility + 43)) # ss置換のDQVZアドレス
+    address_ss_line=$((address_ss_mod + num_mod_glyphs * 6)) # ss置換の罫線アドレス
+    address_ss_arrow=$((address_ss_line + 32)) # ss置換の矢印アドレス
+    address_ss_zero=$((address_ss_arrow + 4)) # ss置換のスラッシュ無し0アドレス
+    address_ss_otherspace=$((address_ss_zero + 10)) # ss置換のその他のスペースアドレス
+    address_ss_end=$((address_ss_otherspace + 2 - 1)) # ss置換の最終アドレス
+    num_ss_glyphs_former=$((address_ss_braille - address_ss_start)) # ss置換のグリフ数(点字の前まで)
+    num_ss_glyphs_latter=$((address_ss_end + 1 - address_ss_braille)) # ss置換のグリフ数(点字から後)
+    num_ss_glyphs=$((address_ss_end + 1 - address_ss_start)) # ss置換の総グリフ数
 
+    lookupIndex_replace=$((lookupIndex_calt + num_calt_lookups)) # 単純置換のlookupナンバー
+    num_replace_lookups="10" # 単純置換のルックアップ数 (lookupの数を変えた場合はcalt_table_makerも変更すること)
+
+    lookupIndex_ss=$((lookupIndex_replace + num_replace_lookups)) # ssテーブルのlookupナンバー
+    num_ss_lookups="11" # ssのルックアップ数 (lookupの数を変えた場合はtable_modificatorも変更すること)
+}
 # 著作権
 copyright="Copyright (c) 2025 omonomo\n\n"
 copyright="${copyright}\" + \"[Victor Mono]\nCopyright (c) 2024 by Rune Bjørnerås. All rights reserved.\n\n"
@@ -189,7 +192,21 @@ move_y_zenkaku_math="30" # ベースフォントの演算子上下移動量 (Lat
 move_y_calt_separate3="-510" # 3桁区切り表示のY座標
 move_y_calt_separate4="452" # 4桁区切り表示のY座標
 scale_calt_decimal="93" # 小数の拡大率
-
+calt_init() {
+    move_x_calt_colon="0" # : のX座標移動量
+    move_y_calt_colon=$((move_y_math + 87)) # : のY座標移動量
+    move_y_calt_colon=$(bc <<< "scale=0; ${move_y_calt_colon} * ${scale_height_latin} / 100") # : のY座標移動量
+    move_y_calt_colon=$(bc <<< "scale=0; ${move_y_calt_colon} * ${scale_height_hankaku} / 100") # : のY座標移動量
+    move_y_calt_bar=$((move_y_math + 15)) # | のY座標移動量
+    move_y_calt_bar=$(bc <<< "scale=0; ${move_y_calt_bar} * ${scale_height_latin} / 100") # | のY座標移動量
+    move_y_calt_bar=$(bc <<< "scale=0; ${move_y_calt_bar} * ${scale_height_hankaku} / 100") # | のY座標移動量
+    move_y_calt_tilde=$((move_y_math + 0)) # ~ のY座標移動量
+    move_y_calt_tilde=$(bc <<< "scale=0; ${move_y_calt_tilde} * ${scale_height_latin} / 100") # ~ のY座標移動量
+    move_y_calt_tilde=$(bc <<< "scale=0; ${move_y_calt_tilde} * ${scale_height_hankaku} / 100") # ~ のY座標移動量
+    move_y_calt_math=$((- move_y_math + 10)) # +-= のY座標移動量
+    move_y_calt_math=$(bc <<< "scale=0; ${move_y_calt_math} * ${scale_height_latin} / 100") # *+-= のY座標移動量
+    move_y_calt_math=$(bc <<< "scale=0; ${move_y_calt_math} * ${scale_height_hankaku} / 100") # *+-= のY座標移動量
+}
 # 通常版・Loose版共通
 center_height_hankaku="373" # 半角文字Y座標中心
 move_x_calt_separate="-512" # 桁区切り表示のX座標移動量 (下書きモードとその他で位置が変わるので注意)
@@ -265,6 +282,7 @@ emoji_flag="true" # 絵文字を減らさない
 draft_flag="false" # 下書きモード
 patch_flag="true" # パッチを当てる
 patch_only_flag="false" # パッチモード
+liga_flag="false" # リガチャフラグ
 
 # Set filenames
 origin_latin_regular="VictorMono-Regular.ttf"
@@ -395,6 +413,7 @@ font_generator_help()
     echo "  -N string              Set fontfamily (\"string\")"
     echo "  -n string              Set fontfamily suffix (\"string\")"
     echo "  -w                     Set the ratio of hankaku to zenkaku characters to 9:16"
+    echo "  -L                     Enable ligatures"
     echo "  -Z                     Disable visible zenkaku space"
     echo "  -z                     Disable visible hankaku space"
     echo "  -u                     Disable zenkaku hankaku underline"
@@ -413,7 +432,7 @@ font_generator_help()
 }
 
 # Get options
-while getopts hVxXf:vlN:n:wZzubtOsceojSdPp OPT
+while getopts hVxXf:vlN:n:wLZzubtOsceojSdPp OPT
 do
     case "${OPT}" in
         "h" )
@@ -472,6 +491,13 @@ do
             move_x_hankaku=${move_x_hankaku_loose} # 半角文字移動量
             move_x_calt_latin=${move_x_calt_latin_loose} # ラテン文字のX座標移動量
             move_x_calt_symbol=${move_x_calt_symbol_loose} # 記号のX座標移動量
+            ;;
+        "L" )
+            echo "Option: Enable ligatures"
+            liga_flag="true"
+            address_vert_start=${address_vert_start_liga} # 合成後のvert置換の先頭アドレス (リガチャあり)
+            lookupIndex_liga_end=${lookupIndex_liga_end_liga} # リガチャ用caltの最終lookupナンバー (リガチャあり)
+            lookupIndex_calt=$((lookupIndex_calt + lookupIndex_liga_end)) # caltテーブルのlookupナンバー (リガチャあり)
             ;;
         "Z" )
             echo "Option: Disable visible zenkaku space"
@@ -569,6 +595,8 @@ do
 done
 echo
 
+address_init
+calt_init
 shift $(($OPTIND - 1))
 
 # Get input fonts
@@ -680,21 +708,6 @@ else
 fi
 echo
 
-# calt用
-move_x_calt_colon="0" # : のX座標移動量
-move_y_calt_colon=$((move_y_math + 87)) # : のY座標移動量
-move_y_calt_colon=$(bc <<< "scale=0; ${move_y_calt_colon} * ${scale_height_latin} / 100") # : のY座標移動量
-move_y_calt_colon=$(bc <<< "scale=0; ${move_y_calt_colon} * ${scale_height_hankaku} / 100") # : のY座標移動量
-move_y_calt_bar=$((move_y_math + 15)) # | のY座標移動量
-move_y_calt_bar=$(bc <<< "scale=0; ${move_y_calt_bar} * ${scale_height_latin} / 100") # | のY座標移動量
-move_y_calt_bar=$(bc <<< "scale=0; ${move_y_calt_bar} * ${scale_height_hankaku} / 100") # | のY座標移動量
-move_y_calt_tilde=$((move_y_math + 0)) # ~ のY座標移動量
-move_y_calt_tilde=$(bc <<< "scale=0; ${move_y_calt_tilde} * ${scale_height_latin} / 100") # ~ のY座標移動量
-move_y_calt_tilde=$(bc <<< "scale=0; ${move_y_calt_tilde} * ${scale_height_hankaku} / 100") # ~ のY座標移動量
-move_y_calt_math=$((- move_y_math + 10)) # +-= のY座標移動量
-move_y_calt_math=$(bc <<< "scale=0; ${move_y_calt_math} * ${scale_height_latin} / 100") # *+-= のY座標移動量
-move_y_calt_math=$(bc <<< "scale=0; ${move_y_calt_math} * ${scale_height_hankaku} / 100") # *+-= のY座標移動量
-
 # フォントバージョンにビルドNo追加
 buildNo=$(date "+%s")
 buildNo=$((buildNo % 315360000 / 60))
@@ -720,7 +733,6 @@ while (i < SizeOf(input_list))
 # Open latin font
     Print("Open " + input_list[i])
     Open(input_list[i])
-
     SelectWorthOutputting()
     UnlinkReference()
     ScaleToEm(${em_ascent1024}, ${em_descent1024})
@@ -745,8 +757,10 @@ while (i < SizeOf(input_list))
 
     lookups = GetLookups("GSUB"); numlookups = SizeOf(lookups); j = 0
     while (j < numlookups)
-        Print("Remove GSUB_" + lookups[j])
-        RemoveLookup(lookups[j])
+        if ("${liga_flag}" == "false" || j < 19 || (107 < j && j < 117))
+            Print("Remove GSUB_" + lookups[j])
+            RemoveLookup(lookups[j])
+        endif
         j += 1
     endloop
 
@@ -788,6 +802,11 @@ while (i < SizeOf(input_list))
 
     Select(65536, 65704)
     SelectFewer("zero.ss02")
+    if ("${liga_flag}" == "true")
+        SelectFewer(65595, 65622)
+        SelectFewer(65624, 65684)
+        SelectFewer(65704)
+    endif
     Clear(); DetachAndRemoveGlyphs() # 異体字等 (ドット無し0を作成する前に削除すること)
 
 # 罫線、ブロックを少し移動
@@ -1013,6 +1032,9 @@ while (i < SizeOf(input_list))
 
 # _ (上げる)
     Select(0u005f) # _
+    if ("${liga_flag}" == "true")
+        SelectMore("underscore_underscore.liga") # リガチャ
+    endif
     Move(0, ${move_y_latin_underbar})
     SetWidth(${width_latin})
 
@@ -1587,6 +1609,159 @@ while (i < SizeOf(input_list))
         j += 1
     endloop
 
+    if ("${liga_flag}" == "true")
+        Select(65595, 65608) # リガチャ
+        SelectMore(65610, 65612)
+        SelectMore(65619)
+        SelectMore(65625, 65630)
+        SelectMore(65632, 65635)
+        SelectMore(65637, 65663)
+        SelectMore(65666, 65677)
+        SelectMore(65678)
+        SelectMore(65679, 65680)
+        SelectMore(65682, 65684)
+        Move(0, ${move_y_math})
+        SetWidth(${width_latin})
+
+        # ?=
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        PasteWithOffset(-100, -820)
+        RemoveOverlap()
+        Select("question_equal.liga"); Copy()
+        Select(65552); PasteInto() # Temporary glyph
+        OverlapIntersect()
+
+        Select(0u2588); Copy() # Full block
+        Select(65553); Paste() # Temporary glyph
+        Move(-580, 800)
+        PasteWithOffset(-670, -800)
+        RemoveOverlap()
+        Copy()
+        Select("question_equal.liga")
+        PasteInto()
+        OverlapIntersect()
+
+        Select(65552); Copy() # Temporary glyph
+        Select("question_equal.liga")
+        PasteWithOffset(0, ${move_y_math})
+        SetWidth(${width_latin})
+
+        # /=
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        PasteWithOffset(-150, -610)
+        RemoveOverlap()
+        Select("slash_equal.liga"); Copy()
+        Select(65552); PasteInto() # Temporary glyph
+        OverlapIntersect()
+
+        Select(0u2588); Copy() # Full block
+        Select(65553); Paste() # Temporary glyph
+        Rotate(-20)
+        Copy()
+        Select("slash_equal.liga")
+        PasteWithOffset(-730, 0)
+        OverlapIntersect()
+
+        Select(65552); Copy() # Temporary glyph
+        Select("slash_equal.liga")
+        PasteWithOffset(0, ${move_y_math})
+        SetWidth(${width_latin})
+
+        # /==
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        PasteWithOffset(-550, 0)
+        PasteWithOffset(-710, -610)
+        RemoveOverlap()
+        Select("slash_equal_equal.liga"); Copy()
+        Select(65552); PasteInto() # Temporary glyph
+        OverlapIntersect()
+
+        Select(0u2588); Copy() # Full block
+        Select(65553); Paste() # Temporary glyph
+        Rotate(-20)
+        Copy()
+        Select("slash_equal_equal.liga")
+        PasteWithOffset(-1280, 0)
+        OverlapIntersect()
+
+        Select(65552); Copy() # Temporary glyph
+        Select("slash_equal_equal.liga")
+        PasteWithOffset(0, ${move_y_math})
+        SetWidth(${width_latin})
+
+        # =!=
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        PasteWithOffset(-110, 0)
+        PasteWithOffset(-1010, 0)
+        PasteWithOffset(-1120, 0)
+        RemoveOverlap()
+        Select("equal_exclam_equal.liga"); Copy()
+        Select(65552); PasteInto() # Temporary glyph
+        OverlapIntersect()
+
+        Select(0u2588); Copy() # Full block
+        Select(65553); Paste() # Temporary glyph
+        Scale(50, 100)
+        Copy()
+        Select("equal_exclam_equal.liga")
+        PasteWithOffset(-550, 0)
+        OverlapIntersect()
+
+        Select(65552); Copy() # Temporary glyph
+        Select("equal_exclam_equal.liga")
+        PasteWithOffset(0, ${move_y_math})
+        SetWidth(${width_latin})
+
+        # />
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        Scale(200, 64.6)
+        Copy()
+        Select("slash_greater.liga")
+        PasteWithOffset(-280, 20)
+        OverlapIntersect()
+        SetWidth(${width_latin})
+
+        # </
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        Scale(200, 64.6)
+        Copy()
+        Select("less_slash.liga")
+        PasteWithOffset(-280, 20)
+        OverlapIntersect()
+        SetWidth(${width_latin})
+
+        # <!--
+        Select(0u2588); Copy() # Full block
+        Select(65552); Paste() # Temporary glyph
+        Move(0, 849 + ${move_y_math})
+        PasteWithOffset(0, -980)
+        Select(0u0021); Copy() # !
+        Select(65552); PasteInto() # Temporary glyph
+        OverlapIntersect()
+        Copy()
+        Select("less_exclam_hyphen_hyphen.liga")
+        Paste(); Move(-1118, 0)
+
+        Select("less_hyphen_hyphen.liga"); Copy() # <--
+        Select("less_exclam_hyphen_hyphen.liga")
+        PasteWithOffset(-558, 0)
+        Select(0u002d); Copy() # -
+        Select("less_exclam_hyphen_hyphen.liga")
+        PasteWithOffset(0, 0)
+        PasteWithOffset(-300, 0)
+        RemoveOverlap()
+        SetWidth(${width_latin})
+
+        Select(65552); Clear() # Temporary glyph
+        Select(65553); Clear() # Temporary glyph
+    endif
+
 # 括弧を上下に移動
     brkt = [0u0028, 0u0029, 0u005b, 0u005d,\
             0u007b, 0u007d] # ()[] {}
@@ -1633,6 +1808,9 @@ while (i < SizeOf(input_list))
         SelectMore(0ua700, 0ua7ff) # 声調装飾文字・ラテン文字拡張 D
         SelectMore(0ufb00, 0ufb4f) # アルファベット表示形
  #        SelectMore(0u1d538, 0u1d56b) # 数学用英数字記号
+        SelectMore(65595, 65622) # 異体字、リガチャ等
+        SelectMore(65624, 65684) # 異体字、リガチャ等
+        SelectMore(65704) # 異体字、リガチャ等
         foreach
             if (WorthOutputting())
                 if (GlyphInfo("Width") <= 700)
@@ -1715,6 +1893,9 @@ while (i < SizeOf(input_list))
         SelectMore(0ua700, 0ua7ff) # 声調装飾文字 - ラテン文字拡張 D
         SelectMore(0ufb00, 0ufb4f) # アルファベット表示形
  #        SelectMore(0u1d538, 0u1d56b) # 数学用英数字記号
+        SelectMore(65595, 65622) # 異体字、リガチャ等
+        SelectMore(65624, 65684) # 異体字、リガチャ等
+        SelectMore(65704) # 異体字、リガチャ等
         foreach
             if (WorthOutputting())
                 if (GlyphInfo("Width") <= 700)
@@ -1980,7 +2161,7 @@ while (i < SizeOf(fontstyle_list))
         if (${lookupIndex_calt} + 1 <= j) # sups フィーチャが重複するため + 1
             Print("Remove " + lookups[j])
             RemoveLookup(lookups[j])
-        elseif (j == 2) # Cyroit側の sups フィーチャを削除
+        elseif (j == 2 + ${lookupIndex_liga_end}) # Cyroit側の sups フィーチャを削除
             Print("Remove " + lookups[j])
             RemoveLookup(lookups[j])
         endif
@@ -5518,8 +5699,8 @@ _EOT_
 if [ "${patch_only_flag}" = "false" ]; then
     rm -f ${font_familyname}*.ttf
 
-    # 下書きモード以外で font_generator に変更が無く、すでにパッチ前フォントが作成されていた場合それを呼び出す
-    if [ "${draft_flag}" = "false" ]; then
+    # 下書きモード、一時作成ファイルを残す以外で font_generator に変更が無く、すでにパッチ前フォントが作成されていた場合それを呼び出す
+    if [ "${draft_flag}" = "false" ] && [ "${leaving_tmp_flag}" = "false" ]; then
         output_data=$(sha256sum font_generator.sh | cut -d ' ' -f 1)
         output_data=${output_data}"_"$(sha256sum font_generator.sh | cut -d ' ' -f 1)
         if [ "${nerd_flag}" = "false" ]; then
@@ -5530,6 +5711,9 @@ if [ "${patch_only_flag}" = "false" ]; then
         fi
         if [ "${loose_flag}" != "false" ]; then
             nopatchsetdir_name="${nopatchsetdir_name}w"
+        fi
+        if [ "${liga_flag}" != "false" ]; then
+            nopatchsetdir_name="${nopatchsetdir_name}L"
         fi
         nopatchsetdir_name="${font_familyname}_${nopatchsetdir_name}"
         file_data_txt=$(find "./${nopatchdir_name}/${nopatchsetdir_name}" -maxdepth 1 -name "${fileDataName}.txt" | head -n 1)
@@ -5599,8 +5783,8 @@ if [ "${patch_only_flag}" = "false" ]; then
             echo
         done
 
-        # 下書きモード以外でフォントを作成した場合、パッチ前フォントと font_generator の情報を保存
-        if [ "${draft_flag}" = "false" ]; then
+        # 下書きモード、一時作成ファイルを残す以外でフォントを作成した場合、パッチ前フォントと font_generator の情報を保存
+        if [ "${draft_flag}" = "false" ] && [ "${leaving_tmp_flag}" = "false" ]; then
             echo "Save nopatch fonts"
             rm -rf "${nopatchdir_name}/${nopatchsetdir_name}"
             mkdir -p "${nopatchdir_name}/${nopatchsetdir_name}"
