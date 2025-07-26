@@ -49,7 +49,8 @@ address_store_vert=$((address_store_arrow + 4)) # 保管した縦書きアドレ
 address_store_zenhan=$((address_store_vert + 109)) # 保管した全角半角アドレス(！゠⁉)
 address_store_d_hyphen=$((address_store_zenhan + 172)) # 保管した縦書き゠アドレス
 address_store_otherspace=$((address_store_d_hyphen + 1)) # 保管したその他のスペースアドレス
-address_store_end=$((address_store_otherspace + 2 - 1)) # 保管したグリフの最終アドレス
+address_store_liga=$((address_store_otherspace + 2)) # 保管したリガチャアドレス
+address_store_end=$((address_store_liga + 2 - 1)) # 保管したグリフの最終アドレス
 
 address_vert_start="1114181" # 合成後のvert置換の先頭アドレス (リガチャなし)
 lookupIndex_liga_end="0" # リガチャ用caltの最終lookupナンバー (リガチャなし)
@@ -87,7 +88,8 @@ address_init() {
     address_ss_arrow=$((address_ss_line + 32)) # ss置換の矢印アドレス
     address_ss_zero=$((address_ss_arrow + 4)) # ss置換のスラッシュ無し0アドレス
     address_ss_otherspace=$((address_ss_zero + 10)) # ss置換のその他のスペースアドレス
-    address_ss_end=$((address_ss_otherspace + 2 - 1)) # ss置換の最終アドレス
+    address_ss_liga=$((address_ss_otherspace + 2)) # ss置換のリガチャアドレス
+    address_ss_end=$((address_ss_liga + 2 - 1)) # ss置換の最終アドレス
     num_ss_glyphs_former=$((address_ss_braille - address_ss_start)) # ss置換のグリフ数(点字の前まで)
     num_ss_glyphs_latter=$((address_ss_end + 1 - address_ss_braille)) # ss置換のグリフ数(点字から後)
     num_ss_glyphs=$((address_ss_end + 1 - address_ss_start)) # ss置換の総グリフ数
