@@ -203,22 +203,22 @@ move_y_calt_separate4="452" # 4桁区切り表示のY座標
 scale_calt_decimal="93" # 小数の拡大率
 calt_init() {
     move_x_calt_colon="0" # : のX座標移動量
-    move_y_calt_colon=$((move_y_math + 87)) # : のY座標移動量
+    move_y_calt_colon=$((move_y_math + 87)) # : のY座標移動量 (= 基準)
     move_y_calt_colon=$(bc <<< "scale=0; ${move_y_calt_colon} * ${scale_height_latin} / 100") # : のY座標移動量
     move_y_calt_colon=$(bc <<< "scale=0; ${move_y_calt_colon} * ${scale_height_hankaku} / 100") # : のY座標移動量
-    move_y_calt_bar=$((move_y_math + 15)) # | のY座標移動量
+    move_y_calt_bar=$((move_y_math + 15)) # | のY座標移動量 (= 基準)
     move_y_calt_bar=$(bc <<< "scale=0; ${move_y_calt_bar} * ${scale_height_latin} / 100") # | のY座標移動量
     move_y_calt_bar=$(bc <<< "scale=0; ${move_y_calt_bar} * ${scale_height_hankaku} / 100") # | のY座標移動量
-    move_y_calt_tilde=$((move_y_math + 0)) # ~ のY座標移動量
+    move_y_calt_tilde=$((move_y_math + 0)) # ~ のY座標移動量 (> 基準)
     move_y_calt_tilde=$(bc <<< "scale=0; ${move_y_calt_tilde} * ${scale_height_latin} / 100") # ~ のY座標移動量
     move_y_calt_tilde=$(bc <<< "scale=0; ${move_y_calt_tilde} * ${scale_height_hankaku} / 100") # ~ のY座標移動量
-    move_y_calt_math=$((- move_y_math + 10)) # +-= のY座標移動量
+    move_y_calt_math=$((- move_y_math + 10)) # +-= のY座標移動量 (括弧基準)
     move_y_calt_math=$(bc <<< "scale=0; ${move_y_calt_math} * ${scale_height_latin} / 100") # *+-= のY座標移動量
     move_y_calt_math=$(bc <<< "scale=0; ${move_y_calt_math} * ${scale_height_hankaku} / 100") # *+-= のY座標移動量
-    move_y_calt_colon2="96" # : のY座標移動量 (括弧用)
+    move_y_calt_colon2="96" # : のY座標移動量 (括弧基準)
     move_y_calt_colon2=$(bc <<< "scale=0; ${move_y_calt_colon2} * ${scale_height_latin} / 100") # : のY座標移動量
     move_y_calt_colon2=$(bc <<< "scale=0; ${move_y_calt_colon2} * ${scale_height_hankaku} / 100") # : のY座標移動量
-    move_y_calt_bar2="26" # | のY座標移動量 (括弧用)
+    move_y_calt_bar2="26" # | のY座標移動量 (括弧基準)
     move_y_calt_bar2=$(bc <<< "scale=0; ${move_y_calt_bar2} * ${scale_height_latin} / 100") # | のY座標移動量
     move_y_calt_bar2=$(bc <<< "scale=0; ${move_y_calt_bar2} * ${scale_height_hankaku} / 100") # | のY座標移動量
 }
@@ -945,6 +945,33 @@ while (i < SizeOf(input_list))
     Move(10, 0)
     SetWidth(${width_latin})
 
+# i (左に移動)
+    # ラテン文字
+    Select(0u0069) # i
+    SelectMore(0u00ec) # ì
+    SelectMore(0u00ed) # í
+    SelectMore(0u00ee) # î
+    SelectMore(0u00ef) # ï
+    SelectMore(0u0129) # ĩ
+    SelectMore(0u012b) # ī
+    SelectMore(0u012f) # į
+    SelectMore(0u0131) # ı
+    SelectMore(0u01d0) # ǐ
+    SelectMore(0u1ec9) # ỉ
+    SelectMore(0u1ecb) # ị
+ #    SelectMore(0u012d) # ĭ
+ #    SelectMore(0u0209) # ȉ
+ #    SelectMore(0u020b) # ȋ
+ #    SelectMore(0u0268) # ɨ
+ #    SelectMore(0u1e2d) # ḭ
+ #    SelectMore(0u1d96) # ᶖ
+ #    SelectMore(0u1e2f) # ḯ
+    # キリル文字
+    SelectMore(0u0456) # і
+    SelectMore(0u0457) # ї
+    Move(-20, 0)
+    SetWidth(${width_latin})
+
 # j (左に少し移動)
     # ラテン文字
     Select(0u006a) # j
@@ -1632,7 +1659,8 @@ while (i < SizeOf(input_list))
     endloop
 
     if ("${liga_flag}" == "true")
-        Select(65595, 65608) # リガチャ
+        Select(65595, 65603) # リガチャ
+        SelectMore(65605, 65608)
         SelectMore(65610, 65612)
         SelectMore(65619)
         SelectMore(65625, 65630)
@@ -4412,7 +4440,11 @@ while (i < \$argc)
         Copy()
         glyphName = GlyphInfo("Name")
         Select(k); Paste()
-        Move(-${move_x_calt_symbol}, 0)
+        if (j <= 6) # *+-=_solidus reverse solidus
+            Move(-${move_x_calt_latin}, 0)
+        else
+            Move(-${move_x_calt_symbol}, 0)
+        endif
         if (symb[j] == 0u0022) # quote
             Move(${move_x_calt_quote}, 0)
         endif
@@ -4460,7 +4492,11 @@ while (i < \$argc)
         Copy()
         glyphName = GlyphInfo("Name")
         Select(k); Paste()
-        Move(${move_x_calt_symbol}, 0)
+        if (j <= 6) # *+-=_solidus reverse solidus
+            Move(${move_x_calt_latin}, 0)
+        else
+            Move(${move_x_calt_symbol}, 0)
+        endif
         if (symb[j] == 0u0022) # quote
             Move(-${move_x_calt_quote}, 0)
         endif
@@ -5535,7 +5571,7 @@ while (i < \$argc)
 
     Select(${address_store_escape}); Copy() # 加工した reverse solidus
     Select(k); Paste()
-    Move(-${move_x_calt_symbol}, 0)
+    Move(-${move_x_calt_latin}, 0)
     SetWidth(${width_hankaku})
     glyphName = GlyphInfo("Name")
     Select(${address_calt_hyphenL} + 6) # 左に移動した reverse solidus
@@ -5544,7 +5580,7 @@ while (i < \$argc)
 
     Select(${address_store_escape}); Copy() # 加工した reverse solidus
     Select(k); Paste()
-    Move(${move_x_calt_symbol}, 0)
+    Move(${move_x_calt_latin}, 0)
     SetWidth(${width_hankaku})
     glyphName = GlyphInfo("Name")
     Select(${address_calt_hyphenR} + 6) # 右に移動した reverse solidus
