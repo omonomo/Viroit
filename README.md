@@ -41,15 +41,15 @@ Viroit (ゔぃろいと) はコーディングにもお使いいただける日�
 
 ## ダウンロード
 
-最新版 v1.3.1 (2025-11-06)
+最新版 v1.3.2 (2025-12-12)
 
 | リンク                                                                                                          | 説明                                               |
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [フォント (Viroit)](https://github.com/omonomo/Viroit/releases/download/v1.3.1/Viroit_v1.3.1.zip)               | 通常版。半角幅が全角の1/2。                        |
-| [フォント (ViroitLoose)](https://github.com/omonomo/Viroit/releases/download/v1.3.1/ViroitLoose_v1.3.1.zip)     | 文字間隔ゆるい版。半角幅が全角の9/16。             |
-| [フォント (ViroitLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.1/ViroitLG_v1.3.1.zip)           | リガチャ対応版。半角幅が全角の1/2。                |
-| [フォント (ViroitLooseLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.1/ViroitLooseLG_v1.3.1.zip) | リガチャ対応文字間隔ゆるい版。半角幅が全角の9/16。 |
-| [ソースコード](https://github.com/omonomo/Viroit/archive/refs/tags/v1.3.1.zip)                                  | 使用方法は[下の方](#基本的な使い方)にあります。    |
+| [フォント (Viroit)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/Viroit_v1.3.2.zip)               | 通常版。半角幅が全角の1/2。                        |
+| [フォント (ViroitLoose)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/ViroitLoose_v1.3.2.zip)     | 文字間隔ゆるい版。半角幅が全角の9/16。             |
+| [フォント (ViroitLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/ViroitLG_v1.3.2.zip)           | リガチャ対応版。半角幅が全角の1/2。                |
+| [フォント (ViroitLooseLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/ViroitLooseLG_v1.3.2.zip) | リガチャ対応文字間隔ゆるい版。半角幅が全角の9/16。 |
+| [ソースコード](https://github.com/omonomo/Viroit/archive/refs/tags/v1.3.2.zip)                                  | 使用方法は[下の方](#基本的な使い方)にあります。    |
 
 フォントやスクリプトの使用は自己責任にてお願いいたします。  
 各ファイルを使用することで生じた不具合・損害等について omonomo は責任を負いません。  
@@ -171,14 +171,14 @@ Loose 版は名称が 「ViroitLoose...」 になります。
 
 Viroit は以下の環境でビルドできることを確認しています。
 
-- macOS Sequoia 15.7.1
-- GNU bash, version 5.3.3(1)-release (aarch64-apple-darwin24.4.0)
+- macOS Tahoe 26.1
+- GNU bash, version 5.3.8(1)-release (aarch64-apple-darwin25.1.0)
 - FontForge 20251009
-- FontTools 4.60.1
+- FontTools 4.61.0
 
 または上記 macOS 上にて
 
-- Docker Desktop 4.49.0 (Engine 28.5.1, Compose v2.40.3-desktop.1)
+- Docker Desktop 4.53.0 (Engine 29.0.1, Compose v2.40.3-desktop.1)
   - Ubuntu 24.04.3 LTS
   - GNU bash, version 5.2.21(1)-release (aarch64-unknown-linux-gnu)
   - FontForge 20230101
