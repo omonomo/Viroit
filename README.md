@@ -45,11 +45,11 @@ Viroit (ゔぃろいと) はコーディングにもお使いいただける日�
 
 | リンク                                                                                                          | 説明                                               |
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [フォント (Viroit)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/Viroit_v1.3.2.zip)               | 通常版。半角幅が全角の1/2。                        |
-| [フォント (ViroitLoose)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/ViroitLoose_v1.3.2.zip)     | 文字間隔ゆるい版。半角幅が全角の9/16。             |
-| [フォント (ViroitLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/ViroitLG_v1.3.2.zip)           | リガチャ対応版。半角幅が全角の1/2。                |
-| [フォント (ViroitLooseLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.2/ViroitLooseLG_v1.3.2.zip) | リガチャ対応文字間隔ゆるい版。半角幅が全角の9/16。 |
-| [ソースコード](https://github.com/omonomo/Viroit/archive/refs/tags/v1.3.2.zip)                                  | 使用方法は[下の方](#基本的な使い方)にあります。    |
+| [フォント (Viroit)](https://github.com/omonomo/Viroit/releases/download/v1.3.3/Viroit_v1.3.3.zip)               | 通常版。半角幅が全角の1/2。                        |
+| [フォント (ViroitLoose)](https://github.com/omonomo/Viroit/releases/download/v1.3.3/ViroitLoose_v1.3.3.zip)     | 文字間隔ゆるい版。半角幅が全角の9/16。             |
+| [フォント (ViroitLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.3/ViroitLG_v1.3.3.zip)           | リガチャ対応版。半角幅が全角の1/2。                |
+| [フォント (ViroitLooseLG)](https://github.com/omonomo/Viroit/releases/download/v1.3.3/ViroitLooseLG_v1.3.3.zip) | リガチャ対応文字間隔ゆるい版。半角幅が全角の9/16。 |
+| [ソースコード](https://github.com/omonomo/Viroit/archive/refs/tags/v1.3.3.zip)                                  | 使用方法は[下の方](#基本的な使い方)にあります。    |
 
 フォントやスクリプトの使用は自己責任にてお願いいたします。  
 各ファイルを使用することで生じた不具合・損害等について omonomo は責任を負いません。  
