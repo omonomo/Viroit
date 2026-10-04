@@ -41,15 +41,15 @@ Viroit (ゔぃろいと) はコーディングにもお使いいただける日�
 
 ## ダウンロード
 
-最新版 v2.0.1 (2026-09-12)
+最新版 v2.0.2 (2026-10-04)
 
 | リンク                                                                                                          | 説明                                               |
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [フォント (Viroit)](https://github.com/omonomo/Viroit/releases/download/v2.0.1/Viroit_v2.0.1.zip)               | 通常版。半角幅が全角の1/2。                        |
-| [フォント (ViroitLoose)](https://github.com/omonomo/Viroit/releases/download/v2.0.1/ViroitLoose_v2.0.1.zip)     | 文字間隔ゆるい版。半角幅が全角の9/16。             |
-| [フォント (ViroitLG)](https://github.com/omonomo/Viroit/releases/download/v2.0.1/ViroitLG_v2.0.1.zip)           | リガチャ対応版。半角幅が全角の1/2。                |
-| [フォント (ViroitLooseLG)](https://github.com/omonomo/Viroit/releases/download/v2.0.1/ViroitLooseLG_v2.0.1.zip) | リガチャ対応文字間隔ゆるい版。半角幅が全角の9/16。 |
-| [ソースコード](https://github.com/omonomo/Viroit/archive/refs/tags/v2.0.1.zip)                                  | 使用方法は[下の方](#基本的な使い方)にあります。    |
+| [フォント (Viroit)](https://github.com/omonomo/Viroit/releases/download/v2.0.2/Viroit_v2.0.2.zip)               | 通常版。半角幅が全角の1/2。                        |
+| [フォント (ViroitLoose)](https://github.com/omonomo/Viroit/releases/download/v2.0.2/ViroitLoose_v2.0.2.zip)     | 文字間隔ゆるい版。半角幅が全角の9/16。             |
+| [フォント (ViroitLG)](https://github.com/omonomo/Viroit/releases/download/v2.0.2/ViroitLG_v2.0.2.zip)           | リガチャ対応版。半角幅が全角の1/2。                |
+| [フォント (ViroitLooseLG)](https://github.com/omonomo/Viroit/releases/download/v2.0.2/ViroitLooseLG_v2.0.2.zip) | リガチャ対応文字間隔ゆるい版。半角幅が全角の9/16。 |
+| [ソースコード](https://github.com/omonomo/Viroit/archive/refs/tags/v2.0.2.zip)                                  | 使用方法は[下の方](#基本的な使い方)にあります。    |
 
 フォントやスクリプトの使用は自己責任にてお願いいたします。  
 各ファイルを使用することで生じた不具合・損害等について omonomo は責任を負いません。  
@@ -136,7 +136,7 @@ Loose 版は名称が 「ViroitLoose...」 になります。
 | Viroit DG | <img alt="DG" src="./images/DG.png" width="266">         | 桁区切り表示版。<br> たくさん並んだ数字とにらめっこする時間を短縮できます。                                             |
 | Viroit FX | <img alt="TS" src="./images/FX.png" width="266">         | 文字間隔固定版。calt と相性が悪いソフト用。<br> また他のバージョンよりも軽快に動作します。                              |
 | Viroit HB | <img alt="HB" src="./images/HB.png" width="266">         | 平凡版。全てのスペースが不可視でグリフ改変も抑えたバージョン。<br> プリントアウト用にどうぞ。                           |
-| Viroit TM | <img alt="TM" src="./images/TM.png" width="266">         | ターミナル版。<br>私用領域以外の中立・曖昧幅の文字を半角にしたバージョン。                                              |
+| Viroit TM | <img alt="TM" src="./images/TM.png" width="266">         | ターミナル版。<br>中立・曖昧幅の文字を半角にしたバージョン。                                                            |
 
 ### 通常版、絵文字減らした版のスタイルセット、異体字について
 
@@ -179,14 +179,16 @@ cv タグを有効にすることでより細かく見た目をカスタマイ�
 
 ### ビルド環境
 
+Viroit は以下の環境でビルドできることを確認しています。
+
 - macOS Tahoe 26.6.2
-- GNU bash, version 5.3.15(1)-release (aarch64-apple-darwin25.4.0)
+- GNU bash, version 5.3.20(1)-release (aarch64-apple-darwin25.6.0)
 - FontForge 20251009
-- FontTools 4.64.0
+- FontTools 4.66.0
 
 または上記 macOS 上にて
 
-- Docker Desktop 4.90.0 (Engine 29.7.2, Compose v5.5.0)
+- Docker Desktop 4.93.0 (Engine 29.8.1, Compose v5.5.1)
   - Ubuntu 26.04 LTS
   - GNU bash, version 5.3.9(1)-release (aarch64-unknown-linux-gnu)
   - FontForge 20230101
@@ -288,7 +290,7 @@ FontForge のスクリプト機能を利用してフォントの合成とグリ�
   `-N string` フォントファミリー名を _string_ にします。省略すると「Viroit」になります。  
   `-n string` フォントファミリー名の接尾語 (「BS」や「SP」の部分) を _string_ にします。  
   `-w` 合成フォントを Loose 版にします。  
-  `-a` 私用領域以外の中立・曖昧な幅の文字を半角にします。  
+  `-a` 中立・曖昧な幅の文字を半角にします。  
   `-L` 生成フォントをリガチャ対応版にします。`-c` に関係なく有効になります。  
   `-Z` 全角スペースを可視化しません。  
   `-z` 半角スペースを可視化しません。  
